@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Obos Beerpong{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/fullcalendar.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('fa/css/all.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+        <footer style="position: fixed;
+        height: 2%;
+        bottom: 0;
+        width: 100%;
+        text-align: center;">
+            Eine <a href="mailto:niklas@debbrecht.com">Niklas Debbrecht</a> Produktion &copy; {{ 'now'|date('Y') }}
+        </footer>
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
+            <script src="{{ asset('js/moment.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ asset('js/jquery.validate.js') }}"></script>
+            <script   src="{{ asset('js/jquery-ui.min.js')}}"></script>
+        {% endblock %}
+        {% block customjs %}
+        {% endblock %}
+    </body>
+</html>

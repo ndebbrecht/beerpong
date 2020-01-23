@@ -1,0 +1,51 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-lg-2">
+        {{ form_label(form.player1name) }}
+    </div>
+    <div class="col-lg-10">
+        {{ form_widget(form.player1name) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        {{ form_label(form.player1external) }}
+    </div>
+    <div class="col-lg-10">
+        {{ form_widget(form.player1external) }}
+    </div>
+</div>
+<div class="row" id="wrapper1">
+    <div class="col-lg-2">
+        {{ form_label(form.player1number) }}
+    </div>
+    <div class="col-lg-10">
+        {{ form_widget(form.player1number) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        {{ form_label(form.player2name) }}
+    </div>
+    <div class="col-lg-10">
+        {{ form_widget(form.player2name) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        {{ form_label(form.player2external) }}
+    </div>
+    <div class="col-lg-10">
+        {{ form_widget(form.player2external) }}
+    </div>
+</div>
+<div class="row" id="wrapper2">
+    <div class="col-lg-2">
+        {{ form_label(form.player2number) }}
+    </div>
+    <div class="col-lg-10">
+        {{ form_widget(form.player2number) }}
+    </div>
+</div>
+    <button class="btn">{{ button_label|default('Anmelden') }}</button>
+{{ form_end(form) }}

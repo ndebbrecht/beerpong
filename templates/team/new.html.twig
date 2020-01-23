@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Neues Team anmelden{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1>Neues Team anmelden</h1>
+        <h3>Für das Turnier am {{ tournaments[0].begin|date('d.m.Y, H:i') }} Uhr</h3>
+    </div>
+
+        {{ include('team/_form.html.twig') }}
+
+{% endblock %}
+{% block customjs %}
+    <script>
+        $('#wrapper1').hide();
+        $('#wrapper2').hide();
+        $('#team_player1external').change(function () {
+            if($('#team_player1external').is(':checked')){
+                $('#team_player1number').attr('required',true);
+                $('#wrapper1').show();
+            } else {
+                $('#team_player1number').attr('required',false);
+                $('#wrapper1').hide();
+            }
+        })
+        $('#team_player2external').change(function () {
+            if($('#team_player2external').is(':checked')){
+                $('#team_player2number').attr('required',true);
+                $('#wrapper2').show();
+            } else {
+                $('#team_player2number').attr('required',false);
+                $('#wrapper2').hide();
+            }
+        })
+        </script>
+{% endblock %}

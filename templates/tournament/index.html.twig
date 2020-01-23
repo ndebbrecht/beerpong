@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournament index{% endblock %}
+
+{% block body %}
+    <h1>Turnierliste</h1>
+
+    <table class="dataTable table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Termin</th>
+                <th>Max. Teams</th>
+                <th>Angemeldete Teams</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tournament in tournaments %}
+            <tr>
+                <td>{{ tournament.id }}</td>
+                <td>{{ tournament.begin ? tournament.begin|date('d.m.Y H:i') : '' }}</td>
+                <td>{{ tournament.maxPlayers }}</td>
+                <td>{{ tournament.teams|length }}</td>
+                <td>
+                    <a href="{{ path('tournament_show', {'id': tournament.id}) }}">Anzeigen</a>
+                    <a href="{{ path('tournament_edit', {'id': tournament.id}) }}">Bearbeiten</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">keine gefunden</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tournament_new') }}">Neues Turnier anlegen</a>
+{% endblock %}

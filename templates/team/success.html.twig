@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Team bearbeiten{% endblock %}
+
+{% block body %}
+    <h1>Team angemeldet!</h1>
+    <h2>Danke, dass ihr euch angemeldet habt, {{ team.player1name }} & {{ team.player2name }}</h2>
+    {% if team.player1external %}
+        <h3>Obo wird sich bald mit dir unter der Nummer {{ team.player1number }} bei dir melden, {{ team.player1name }}</h3>
+    {% endif %}
+    {% if team.player2external %}
+        <h3>Obo wird sich bald mit dir unter der Nummer {{ team.player2number }} bei dir melden, {{ team.player2name }}</h3>
+    {% endif %}
+    <a href="{{ path('team_new') }}">Zurück zur Anmeldung</a>
+{% endblock %}

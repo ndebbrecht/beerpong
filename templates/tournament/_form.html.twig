@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-lg-2">
+            {{ form_label(form.begin) }}
+        </div>
+        <div class="col-lg-10">
+            {{ form_widget(form.begin) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            {{ form_label(form.maxPlayers) }}
+        </div>
+        <div class="col-lg-10">
+            {{ form_widget(form.maxPlayers) }}
+        </div>
+    </div>
+    <button class="btn">{{ button_label|default('Speichern') }}</button>
+{{ form_end(form) }}

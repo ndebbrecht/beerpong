@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournament{% endblock %}
+
+{% block body %}
+    <h1>Tournament</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tournament.id }}</td>
+            </tr>
+            <tr>
+                <th>Termin</th>
+                <td>{{ tournament.begin ? tournament.begin|date('d.m.Y H:i') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Angemeldet/Max. Spieler</th>
+                <td>{{ tournament.teams|length }}/{{ tournament.maxPlayers }}</td>
+            </tr>
+        </tbody>
+        <h3>Angemeldete Teams</h3>
+        <table class="dataTable">
+            <thead>
+            <th>Spieler 1</th>
+            <th>1. Telefonnr.</th>
+            <th>Spieler 2</th>
+            <th>2. Telefonnr.</th>
+            <th>Aktionen</th>
+            </thead>
+            <tbody>
+            {% for team in tournament.teams %}
+                <tr>
+                <td>{{ team.player1name }}</td>
+                {% if team.player1external %}
+                    <td>{{ team.player1number }}</td>
+                {% else %}
+                    <td>-</td>
+                {% endif %}
+                <td>{{ team.player2name }}</td>
+                {% if team.player2external %}
+                    <td>{{ team.player2number }}</td>
+                {% else %}
+                    <td>-</td>
+                {% endif %}
+                    <td><a href="{{ path('team_edit', {'id': team.id}) }}">Bearbeiten</a></td>
+            {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </table>
+
+    <a href="{{ path('tournament_index') }}">Zurück zur Liste</a>
+
+    <a href="{{ path('tournament_edit', {'id': tournament.id}) }}">Bearbeiten</a>
+
+    {{ include('tournament/_delete_form.html.twig') }}
+{% endblock %}

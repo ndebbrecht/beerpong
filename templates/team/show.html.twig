@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Team{% endblock %}
+
+{% block body %}
+    <h1>Team</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ team.id }}</td>
+            </tr>
+            <tr>
+                <th>Player1name</th>
+                <td>{{ team.player1name }}</td>
+            </tr>
+            <tr>
+                <th>Player1external</th>
+                <td>{{ team.player1external ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Player1number</th>
+                <td>{{ team.player1number }}</td>
+            </tr>
+            <tr>
+                <th>Player2name</th>
+                <td>{{ team.player2name }}</td>
+            </tr>
+            <tr>
+                <th>Player2external</th>
+                <td>{{ team.player2external ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Player2number</th>
+                <td>{{ team.player2number }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tournament_show', {'id': team.tournament.id}) }}">Zurück zum Turnier</a>
+
+    <a href="{{ path('team_edit', {'id': team.id}) }}">edit</a>
+
+    {{ include('team/_delete_form.html.twig') }}
+{% endblock %}

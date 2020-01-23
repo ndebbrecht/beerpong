@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Tournament{% endblock %}
+
+{% block body %}
+    <h1>Neues Turnier</h1>
+
+    {{ include('tournament/_form.html.twig') }}
+
+    <a href="{{ path('tournament_index') }}">Zur Turnierübersicht</a>
+{% endblock %}
+{% block customjs %}
+<script>
+    $('tournament_begin').datepicker({
+        dateFormat: 'dd.mm.yyyy',
+        monthNames: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+        dayNamesMin: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+        defaultDate: "{{ "now"|date("dd.mm.yyyy") }}"
+    });
+</script>
+{% endblock %}
