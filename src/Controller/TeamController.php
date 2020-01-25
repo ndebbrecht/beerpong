@@ -28,7 +28,7 @@ class TeamController extends AbstractController
         {
             return $this->render('team/error.html.twig', array('error' => 'Aktuell steht kein Turnier an!'));
         }
-        if($tournaments[0]->getMaxPlayers() >= count($tournaments[0]->getTeams()))
+        if($tournaments[0]->getMaxPlayers() <= count($tournaments[0]->getTeams()))
         {
             return $this->render('team/error.html.twig', array('error' => 'Maximale Spieleranzahl erreicht!'));
         }
