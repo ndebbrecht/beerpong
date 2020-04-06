@@ -3,11 +3,10 @@
 {% block title %}New Tournament{% endblock %}
 
 {% block body %}
+    <a class="btn btn-xs btn-default" href="{{ path('tournament_index') }}"><i class="fa fa-arrow-left"></i> Zur Turnierübersicht</a>
     <h1>Neues Turnier</h1>
 
     {{ include('tournament/_form.html.twig') }}
-
-    <a href="{{ path('tournament_index') }}">Zur Turnierübersicht</a>
 {% endblock %}
 {% block customjs %}
 <script>

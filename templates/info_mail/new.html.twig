@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New InfoMail{% endblock %}
+
+{% block body %}
+    <a class="btn btn-xs btn-default" href="{{ path('info_mail_index') }}"><i class="fa fa-arrow-left"></i> Zurück</a>
+    <h1>Neue Mitteilung</h1>
+
+    {{ include('info_mail/_form.html.twig', {'button_label': 'Speichern'}) }}
+{% endblock %}
+{% block customjs %}
+    <script>
+        $(document).ready(function () {
+            $('#info_mail_content').summernote();
+        })
+    </script>
+{% endblock %}

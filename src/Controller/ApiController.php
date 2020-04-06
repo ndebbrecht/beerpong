@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Team;
 use App\Entity\Tournament;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ use Symfony\Component\Serializer\Serializer;
 class ApiController extends AbstractController
 {
     /**
-     * @Route("/", name="api")
+     * @Route("/all", name="api_all")
      */
     public function index()
     {
@@ -34,11 +35,19 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="api")
+     * @Route("/{id}", name="api_detail")
      */
     public function tournaments(Tournament $tournament)
     {
-        return new Response($this->getSerializer()->serialize($tournament, 'json',  [AbstractNormalizer::IGNORED_ATTRIBUTES => ['tournament']]));
+        return new Response(
+            $this->getSerializer()
+                ->serialize(
+                    array(
+                        'timestamp' => $tournament->getBegin()->format('U'),
+                        'teams' => $tournament->getTeams()
+                    ), 'json',  [AbstractNormalizer::IGNORED_ATTRIBUTES => ['tournament']]
+                )
+        );
     }
 
     private function getSerializer()

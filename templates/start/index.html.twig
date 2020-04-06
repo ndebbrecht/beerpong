@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Obos Bierpong - Start{% endblock %}
+
+{% block body %}
+    <div class="panel-group">
+        {% if info|length >= 1 %}
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <small class="pull-right">{{ info.published|date('d.m.Y, H:i:s') }}</small>
+                    <h4>{{ info.topic }}</h4>
+                </div>
+                <div class="panel-body">
+                    <p>{{ info.content|raw }}</p>
+                    <a class="btn btn-md btn-primary pull-right" href="{{ path('subscriber_new') }}"><i class="fa fa-mail-bulk"></i> Newsletter abonnieren</a>
+                </div>
+            </div>
+        {% endif %}
+        {% if tournament.begin >= date('now') %}
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>Anmelden zum nächsten Turnier</h4>
+                </div>
+                <div class="panel-body">
+                    <p>Termin: {{ tournament.begin|date('d.m.Y, H:i') }}</p>
+                    <p>Angemeldet: {{ signed }}/{{ tournament.maxPlayers }} Teams</p>
+                    {% if tournament.maxPlayers > signed %}
+                        <a class="btn btn-md btn-primary pull-right"
+                           href="{{ path('team_new', {'id': tournament.id}) }}"><i class="fa fa-user-friends"></i> Jetzt als Team anmelden!</a>
+                    {% else %}
+                            <a href="#" class="btn btn-default disabled pull-right">Maximale Teamanzahl erreicht!</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

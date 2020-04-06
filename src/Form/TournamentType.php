@@ -26,11 +26,15 @@ class TournamentType extends AbstractType
                     '15',
                     '30',
                     '45',
-                )
+                ),
+
             ))
             ->add('maxPlayers', IntegerType::class, array(
                 'required' => true,
                 'label' => 'Max. Teams: ',
+                'attr' => array(
+                    'class' => 'form-control'
+                )
             ))
         ;
     }

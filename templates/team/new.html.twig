@@ -4,34 +4,59 @@
 
 {% block body %}
     <div class="row">
-        <h1>Neues Team anmelden</h1>
-        <h3>Für das Turnier am {{ tournaments[0].begin|date('d.m.Y, H:i') }} Uhr</h3>
+        <div class="col-lg-12">
+            <h1>Team anmelden</h1>
+        </div>
     </div>
-
-        {{ include('team/_form.html.twig') }}
-
+    <div class="row">
+        <div class="col-lg-6">
+            {{ include('team/_form.html.twig') }}
+            <br/>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Infos zum Turnier</div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">Angemeldet/Maximal</th>
+                            <th scope="col">Datum</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ tournament.teams|length }}/{{ tournament.maxPlayers }} Teams</td>
+                            <td>{{ tournament.begin|date('d.m.Y, H:i') }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block customjs %}
     <script>
         $('#wrapper1').hide();
         $('#wrapper2').hide();
         $('#team_player1external').change(function () {
-            if($('#team_player1external').is(':checked')){
-                $('#team_player1number').attr('required',true);
+            if ($('#team_player1external').is(':checked')) {
+                $('#team_player1number').attr('required', true);
                 $('#wrapper1').show();
             } else {
-                $('#team_player1number').attr('required',false);
+                $('#team_player1number').attr('required', false);
                 $('#wrapper1').hide();
             }
         })
         $('#team_player2external').change(function () {
-            if($('#team_player2external').is(':checked')){
-                $('#team_player2number').attr('required',true);
+            if ($('#team_player2external').is(':checked')) {
+                $('#team_player2number').attr('required', true);
                 $('#wrapper2').show();
             } else {
-                $('#team_player2number').attr('required',false);
+                $('#team_player2number').attr('required', false);
                 $('#wrapper2').hide();
             }
         })
-        </script>
+    </script>
 {% endblock %}

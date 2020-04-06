@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InfoMail{% endblock %}
+
+{% block body %}
+<div class="col-lg-12">
+    <div class="row">
+        <a class="btn btn-xs btn-warning pull-right" href="{{ path('info_mail_edit', {'id': info_mail.id}) }}"><i
+                    class="fa fa-edit"></i> Bearbeiten</a>
+        {{ include('info_mail/_delete_form.html.twig') }}
+        <a class="btn btn-xs btn-default" href="{{ path('info_mail_index') }}"><i
+                    class="fa fa-arrow-left"></i>
+            Zurück</a>
+    </div>
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="panel panel-danger">
+            <div class="panel-heading"><h4>{{ info_mail.topic }}</h4></div>
+            <div class="panel-body">
+                <p>{{ info_mail.content|raw }}</p>
+            </div>
+            <div class="panel-footer">
+                <small>{{ info_mail.published|date('d.m.Y, H:i:s') }}</small>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

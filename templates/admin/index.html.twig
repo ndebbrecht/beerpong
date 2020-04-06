@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h2>Administrator</h2>
+        <div class="col-lg-6">
+            <div class="panel-group">
+                <h4>Mitteilungen <a class="btn btn-xs btn-success" href="{{ path('info_mail_new') }}"><i class="fa fa-plus"></i> Neu</a> <a class="btn btn-xs btn-primary" href="{{ path('info_mail_index') }}"><i class="fa fa-list"></i> Alle</a> </h4>
+                {% for info in infoMails %}
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <small class="pull-right">{{ info.published|date('d.m.Y, H:i:s') }}</small>
+                            {{ info.topic }}
+                        </div>
+                        <div class="panel-body">
+                            {{ info.content|raw }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h4>Aktuelles Turnier <a class="btn btn-xs btn-primary pull-right" href="{{ path('tournament_show', {'id': tournament.id}) }}"><i class="fa fa-info"></i> Details</a> </h4>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Termin</th>
+                    <th scope="col">Angemeldet</th>
+                    <th scope="col">Maximal</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ tournament.begin|date('d.m.Y, H:i') }}</td>
+                    <td>{{ tournament.teams|length }}</td>
+                    <td>{{ tournament.maxPlayers }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-xs btn-primary" href="{{ path('tournament_index') }}"><i class="fa fa-list"></i> Alle</a>
+        </div>
+    </div>
+{% endblock %}

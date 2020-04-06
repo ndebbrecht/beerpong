@@ -16,19 +16,36 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TeamController extends AbstractController
 {
-
     /**
-     * @Route("/", name="team_new", methods={"GET","POST"})
+     * @Route("/apply", name="team_new_redirect")
      */
-    public function new(Request $request): Response
+    public function new_redirect(): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $tournaments = $entityManager->getRepository(Tournament::class)->findBy(array(), array('begin' => 'DESC'));
-        if($tournaments == null)
+        $em = $this->getDoctrine()->getManager();
+        $tournament = $em->getRepository(Tournament::class)->findOneBy(array(), array('begin' => 'DESC'));
+        if($tournament == null)
         {
             return $this->render('team/error.html.twig', array('error' => 'Aktuell steht kein Turnier an!'));
         }
-        if($tournaments[0]->getMaxPlayers() <= count($tournaments[0]->getTeams()))
+        if($tournament->getMaxPlayers() <= count($tournament->getTeams()))
+        {
+            return $this->render('team/error.html.twig', array('error' => 'Maximale Spieleranzahl erreicht!'));
+        }
+        return $this->redirectToRoute('team_new', array(
+            'id' => $tournament->getId(),
+        ));
+    }
+
+    /**
+     * @Route("/apply/{id}", name="team_new", methods={"GET","POST"})
+     */
+    public function new(Tournament $tournament, Request $request): Response
+    {
+        if($tournament == null)
+        {
+            return $this->render('team/error.html.twig', array('error' => 'Aktuell steht kein Turnier an!'));
+        }
+        if($tournament->getMaxPlayers() <= count($tournament->getTeams()))
         {
             return $this->render('team/error.html.twig', array('error' => 'Maximale Spieleranzahl erreicht!'));
         }
@@ -38,7 +55,7 @@ class TeamController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $team->setTournament($tournaments[0]);
+            $team->setTournament($tournament);
             $entityManager->persist($team);
             $entityManager->flush();
 
@@ -48,7 +65,7 @@ class TeamController extends AbstractController
         return $this->render('team/new.html.twig', [
             'team' => $team,
             'form' => $form->createView(),
-            'tournaments' => $tournaments,
+            'tournament' => $tournament,
         ]);
     }
 

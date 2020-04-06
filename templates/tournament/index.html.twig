@@ -3,10 +3,14 @@
 {% block title %}Tournament index{% endblock %}
 
 {% block body %}
-    <h1>Turnierliste</h1>
+    <div class="row">
+        <h1>Turnierliste<a class="btn btn-lg btn-success pull-right" href="{{ path('tournament_new') }}"><i
+                        class="fa fa-glass-cheers"></i> Neues Turnier anlegen</a></h1>
+    </div>
 
-    <table class="dataTable table">
-        <thead>
+    <div class="row">
+        <table id="tournament_table" class="dataTable">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Termin</th>
@@ -14,26 +18,32 @@
                 <th>Angemeldete Teams</th>
                 <th>Aktionen</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for tournament in tournaments %}
-            <tr>
-                <td>{{ tournament.id }}</td>
-                <td>{{ tournament.begin ? tournament.begin|date('d.m.Y H:i') : '' }}</td>
-                <td>{{ tournament.maxPlayers }}</td>
-                <td>{{ tournament.teams|length }}</td>
-                <td>
-                    <a href="{{ path('tournament_show', {'id': tournament.id}) }}">Anzeigen</a>
-                    <a href="{{ path('tournament_edit', {'id': tournament.id}) }}">Bearbeiten</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">keine gefunden</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('tournament_new') }}">Neues Turnier anlegen</a>
+            </thead>
+            <tbody>
+            {% for tournament in tournaments %}
+                <tr>
+                    <td>{{ tournament.id }}</td>
+                    <td>{{ tournament.begin ? tournament.begin|date('d.m.Y H:i') : '' }}</td>
+                    <td>{{ tournament.maxPlayers }}</td>
+                    <td>{{ tournament.teams|length }}</td>
+                    <td>
+                        <a class="btn btn-xs btn-info" href="{{ path('tournament_show', {'id': tournament.id}) }}"><i class="fa fa-info"></i> Anzeigen</a>
+                        <a class="btn btn-xs btn-warning" href="{{ path('tournament_edit', {'id': tournament.id}) }}"><i class="fa fa-edit"></i> Bearbeiten</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">keine gefunden</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block customjs %}
+    <script>
+        $(document).ready(function () {
+            $('#tournament_table').DataTable();
+        })
+    </script>
 {% endblock %}

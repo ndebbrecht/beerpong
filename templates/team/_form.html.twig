@@ -8,11 +8,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-2">
-        {{ form_label(form.player1external) }}
-    </div>
-    <div class="col-lg-10">
+    <div class="col-lg-12">
         {{ form_widget(form.player1external) }}
+        {{ form_label(form.player1external) }}
     </div>
 </div>
 <div class="row" id="wrapper1">
@@ -23,6 +21,7 @@
         {{ form_widget(form.player1number) }}
     </div>
 </div>
+<hr/>
 <div class="row">
     <div class="col-lg-2">
         {{ form_label(form.player2name) }}
@@ -32,11 +31,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-2">
-        {{ form_label(form.player2external) }}
-    </div>
-    <div class="col-lg-10">
+    <div class="col-lg-12">
         {{ form_widget(form.player2external) }}
+        {{ form_label(form.player2external) }}
     </div>
 </div>
 <div class="row" id="wrapper2">
@@ -47,5 +44,6 @@
         {{ form_widget(form.player2number) }}
     </div>
 </div>
-    <button class="btn">{{ button_label|default('Anmelden') }}</button>
+<button class="btn btn-md btn-success"><i class="fa fa-glass-cheers"></i> {{ button_label|default('Anmelden') }}
+</button>
 {{ form_end(form) }}

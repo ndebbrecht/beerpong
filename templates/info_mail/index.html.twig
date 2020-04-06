@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InfoMail index{% endblock %}
+
+{% block body %}
+    <h1>Mitteilungen</h1>
+
+    <a class="btn btn-lg btn-success pull-right" href="{{ path('info_mail_new') }}"><i class="fa fa-newspaper"></i> Neue Mitteilung</a>
+
+    <table class="dataTable">
+        <thead>
+            <tr>
+                <th>Nr.</th>
+                <th>Titel</th>
+                <th>Datum</th>
+                <th>Optionen</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for info_mail in info_mails %}
+            <tr>
+                <td>{{ info_mail.id }}</td>
+                <td><a href="{{ path('info_mail_show', {'id': info_mail.id}) }}">{{ info_mail.topic }}</a></td>
+                <td>{{ info_mail.published|date('d.m.Y, H:i:s') }}</td>
+                <td>
+                    <a class="btn btn-md btn-info" href="{{ path('info_mail_edit', {'id': info_mail.id}) }}"><i class="fa fa-edit"></i> Bearbeiten</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Keine Einträge gefunden</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

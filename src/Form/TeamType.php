@@ -18,6 +18,9 @@ class TeamType extends AbstractType
             ->add('player1name', TextType::class, array(
                 'label' => 'Spieler 1: ',
                 'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
             ))
             ->add('player1external', CheckboxType::class, array(
                 'label' => 'bist du extern? ',
@@ -26,10 +29,16 @@ class TeamType extends AbstractType
             ->add('player1number', TelType::class, array(
                 'label' => 'Handynummer: ',
                 'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
             ))
             ->add('player2name', TextType::class, array(
                 'label' => 'Spieler 2: ',
                 'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
             ))
             ->add('player2external', CheckboxType::class, array(
                 'label' => 'bist du extern? ',
@@ -38,6 +47,9 @@ class TeamType extends AbstractType
             ->add('player2number', TextType::class, array(
                 'label' => 'Handynummer: ',
                 'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
             ))
         ;
     }
